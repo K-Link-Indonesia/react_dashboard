@@ -1,4 +1,4 @@
-import { NotificationManager } from "react-notifications";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 export default function GLib() {
@@ -9,5 +9,5 @@ export function CCC() {
 }
 export function falert(msg) {
   NotificationManager.info(msg);
-  alert(msg);
+  return(<NotificationContainer/>);
 }

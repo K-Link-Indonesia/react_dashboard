@@ -1,14 +1,18 @@
 import { useState } from 'react';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { falert } from './lib/GLib';
 import { SessionDestroy, SessionSet } from './lib/Session';
 
 export default function Login(){
-  falert('baru nih');
+  //falert('baru nih');
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => { //all form changes will directly transferred to inputs variable
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}));
+  }
+  const Notify = (event) => {
+    falert('keren nih');
   }
   const Register = (event) => {
     event.preventDefault();
@@ -51,11 +55,13 @@ export default function Login(){
   }
   return (
     <form onSubmit={handleSubmit}>
+      <NotificationContainer/>
       <center>
         <input name="username" value={inputs["username"] || ""}  onChange={handleChange} placeholder="Username"/><br/>
         <input name="password" value={inputs["password"] || ""}  onChange={handleChange} placeholder="Password"/><br/>
         <button type="submit">Submit</button>
         <button type="button" onClick={Register}>Register</button>
+        <button type="button" onClick={Notify}>Notify</button>
       </center>
     </form>
   );
