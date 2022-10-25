@@ -4,8 +4,12 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import * as GLib from './lib/GLib';
 import {CCC} from './lib/GLib';
 import Login, { Logout } from './Login';
+import {SessionGet, SessionSet} from './lib/Session';
 
 export default function Home() {
+  alert("before: "+SessionGet("test_session"));
+  SessionSet("test_session","value session");
+  alert(SessionGet("test_session"));
   return (
     <Router>
       <div class="Home-header">

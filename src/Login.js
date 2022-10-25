@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SessionSet } from './lib/Session';
 
 export default function Login(){
   const [inputs, setInputs] = useState({});
@@ -38,6 +39,12 @@ export default function Login(){
       (response) => response.json()
     ).then((result)=>{
       alert(JSON.stringify(result));
+      if(result['result']){
+        SessionSet("session_id",result['result']['id']);
+        SessionSet("session_name",result['result']['username']);
+        SessionSet("session_token",result['result']['token']);
+        window.location='/';
+      }
     }).catch(error => console.warn(error));
   }
   return (
