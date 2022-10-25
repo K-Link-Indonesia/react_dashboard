@@ -39,7 +39,7 @@ export default function Login(){
       (response) => response.json()
     ).then((result)=>{
       alert(JSON.stringify(result));
-      if(result['result']){
+      if(result['status']==true){
         SessionSet("session_id",result['result']['id']);
         SessionSet("session_name",result['result']['username']);
         SessionSet("session_token",result['result']['token']);
