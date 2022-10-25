@@ -60,5 +60,6 @@ export default function Login(){
 }
 export function Logout(){
   SessionDestroy();
-  return (<div>You have been logout successfully.</div>);
+  window.location="/home";
+  //return (<div>You have been logout successfully.</div>);
 }
