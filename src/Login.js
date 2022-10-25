@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { falert } from './lib/GLib';
 import { SessionDestroy, SessionSet } from './lib/Session';
 
 export default function Login(){
+  falert('baru nih');
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => { //all form changes will directly transferred to inputs variable
     const name = event.target.name;
