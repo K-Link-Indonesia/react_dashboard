@@ -15,10 +15,15 @@ export default function Session() {
   };
   */
 }
+var arrsession=[];
 export function SessionSet(field,value){
   sessionStorage.setItem(field,value);
+  arrsession.push(field);
   // Also set this in cookie/localStorage
 }
 export function SessionGet(field){
   return sessionStorage.getItem(field);
+}
+export function SessionDestroy(field){
+  sessionStorage.clear();
 }

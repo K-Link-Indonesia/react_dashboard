@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SessionSet } from './lib/Session';
+import { SessionDestroy, SessionSet } from './lib/Session';
 
 export default function Login(){
   const [inputs, setInputs] = useState({});
@@ -59,5 +59,6 @@ export default function Login(){
   );
 }
 export function Logout(){
+  SessionDestroy();
   return (<div>You have been logout successfully.</div>);
 }
