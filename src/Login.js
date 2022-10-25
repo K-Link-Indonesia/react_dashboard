@@ -51,3 +51,6 @@ export default function Login(){
     </form>
   );
 }
+export function Logout(){
+  return (<div>You have been logout successfully.</div>);
+}

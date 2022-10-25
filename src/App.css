@@ -37,6 +37,9 @@
   }
 }
 
+div{
+  box-sizing: border-box;
+}
 .Home-header{
   position:fixed;
   width:100%;
@@ -49,9 +52,11 @@
   white-space: nowrap;
 }
 .Home-header>.right{
-  text-align:right;
   width:100%;
   padding-right:10px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
 .Home-body{
   padding-top:50px;
