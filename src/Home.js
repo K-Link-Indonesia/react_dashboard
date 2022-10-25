@@ -8,14 +8,21 @@ import Login from './Login';
 export default function Home() {
   return (
     <Router>
-      <header className="Home-header">
-          <p>HEADER SECTION</p> <CCC>This is my comment</CCC>
+      <div class="Home-header">
+        <div class="left"><p>HEADER SECTION</p></div>
+        <div class="right"><p>Logout</p></div>
+      </div>
+      <div class="Home-body">
+        <div class="Home-navigation">
           <a href="/">Home</a><br/>
           <a href="/login">Login Form</a><br/>
-      </header>
-      <Routes>
-        <Route path='/login' element={<Login/>}/>
-      </Routes>
+        </div>
+        <div class="Home-content">
+          <Routes>
+            <Route path='/login' element={<Login/>}/>
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 }

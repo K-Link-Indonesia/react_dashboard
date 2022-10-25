@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.Home-header{
+  position:fixed;
+  width:100%;
+  height:50px;
+  overflow:hidden;
+  background-color:#ADCDFF;
+  display:flex;
+}
+.Home-header>.left{
+  white-space: nowrap;
+}
+.Home-header>.right{
+  text-align:right;
+  width:100%;
+  padding-right:10px;
+}
+.Home-body{
+  padding-top:50px;
+  width:100%;
+  height:100%;
+  display:flex;
+}
+.Home-navigation{
+  width:250px;
+  height:100%;
+}
+.Home-content{
+  width:100%;
+}

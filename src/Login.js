@@ -42,10 +42,12 @@ export default function Login(){
   }
   return (
     <form onSubmit={handleSubmit}>
-      <input name="username" value={inputs["username"] || ""}  onChange={handleChange}/>
-      <input name="password" value={inputs["password"] || ""}  onChange={handleChange}/>
-      <button type="submit">Submit</button>
-      <button type="button" onClick={Register}>Register</button>
+      <center>
+        <input name="username" value={inputs["username"] || ""}  onChange={handleChange} placeholder="Username"/><br/>
+        <input name="password" value={inputs["password"] || ""}  onChange={handleChange} placeholder="Password"/><br/>
+        <button type="submit">Submit</button>
+        <button type="button" onClick={Register}>Register</button>
+      </center>
     </form>
   );
 }
