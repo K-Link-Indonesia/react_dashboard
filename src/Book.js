@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { falert } from './lib/GLib';
 import { SessionDestroy, SessionGet, SessionSet } from './lib/Session';
+import ReactDOM from 'react-dom/client';
 
 export default function Book(){
   const [inputs, setInputs] = useState({});
@@ -12,6 +13,9 @@ export default function Book(){
   }
   const Notify = (event) => {
     falert('keren nih');
+  }
+  function Tara(){
+    return (<div>tara</div>);
   }
   function GetList(){
     fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
@@ -35,6 +39,13 @@ export default function Book(){
           <td>{row.create_at}</td>
         </tr>
       );
+      ReactDOM.hydrateRoot(document.getElementById('list_cont'),<tr>
+        <td>asdf</td>
+        <td>Description</td>
+        <td>Author</td>
+        <td>Create</td>
+      </tr>);
+      //list_cont.render(<dada>tata</dada>);
       return (<tbody><tr>
         <td>asdf</td>
         <td>Description</td>
@@ -65,7 +76,9 @@ export default function Book(){
             <td>Create</td>
           </tr>
         </tbody>
+        <tbody id="list_cont"></tbody>
         {GetList()}
+        {Tara()}
       </table>
     </form>
   );
