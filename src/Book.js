@@ -11,12 +11,6 @@ export default function Book(){
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}));
   }
-  const Notify = (event) => {
-    falert('keren nih');
-  }
-  function Tara(){
-    return (<div>tara</div>);
-  }
   function GetList(){
     fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
       method:"POST",
@@ -31,27 +25,14 @@ export default function Book(){
       (response) => response.json()
     ).then((result)=>{
       //alert(JSON.stringify(result.data.getAllBooks));
-      var listItems = result.data.getAllBooks.map(row =>
+      ReactDOM.hydrateRoot(document.getElementById('list_cont'),result.data.getAllBooks.map(row =>
         <tr>
           <td>{row.title}</td>
           <td>{row.description}</td>
           <td>{row.author}</td>
           <td>{row.create_at}</td>
         </tr>
-      );
-      ReactDOM.hydrateRoot(document.getElementById('list_cont'),<tr>
-        <td>asdf</td>
-        <td>Description</td>
-        <td>Author</td>
-        <td>Create</td>
-      </tr>);
-      //list_cont.render(<dada>tata</dada>);
-      return (<tbody><tr>
-        <td>asdf</td>
-        <td>Description</td>
-        <td>Author</td>
-        <td>Create</td>
-      </tr></tbody>);
+      ));
     }).catch(error => console.warn(error));
   }
   const handleSubmit = (event) => {
@@ -69,16 +50,9 @@ export default function Book(){
             <th>Author</th>
             <th>Create</th>
           </tr>
-          <tr>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Author</td>
-            <td>Create</td>
-          </tr>
         </tbody>
         <tbody id="list_cont"></tbody>
         {GetList()}
-        {Tara()}
       </table>
     </form>
   );
