@@ -30,6 +30,7 @@ export default function Book(){
           <td>{row.description}</td>
           <td>{row.author}</td>
           <td>{row.create_at}</td>
+          <td align="center"><button type="button" onClick={()=>Delete(row)}>Delete</button></td>
         </tr>
       </tbody>
     );
@@ -44,6 +45,14 @@ export default function Book(){
   const handleSubmit = (event) => {
     event.preventDefault();
   }
+  const Delete = (data) => {
+    var q=window.confirm("Are you sure to delete this data?");
+    if(q==true){
+      alert(JSON.stringify(data));
+    }else{
+
+    }
+  }
   return (
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
@@ -55,6 +64,7 @@ export default function Book(){
             <th>Description</th>
             <th>Author</th>
             <th>Create</th>
+            <th></th>
           </tr>
         </tbody>
         {GetList()}
