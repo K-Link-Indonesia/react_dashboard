@@ -1,17 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { falert } from './lib/GLib';
 import { SessionDestroy, SessionGet, SessionSet } from './lib/Session';
 import ReactDOM from 'react-dom/client';
 
 export default function Book(){
-  const [inputs, setInputs] = useState({});
-  const handleChange = (event) => { //all form changes will directly transferred to inputs variable
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}));
-  }
-  function GetList(){
+  const [tableList, setTableList] = useState([]);
+  useEffect(() => {
     fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
       method:"POST",
       headers:{
@@ -24,16 +19,27 @@ export default function Book(){
     }).then(
       (response) => response.json()
     ).then((result)=>{
-      //alert(JSON.stringify(result.data.getAllBooks));
-      ReactDOM.hydrateRoot(document.getElementById('list_cont'),result.data.getAllBooks.map(row =>
+      setTableList(result.data.getAllBooks);
+    }).catch(error => console.warn(error));
+  }, []);
+  function GetList(){
+    return tableList.map(row =>
+      <tbody key={row.id}>
         <tr>
           <td>{row.title}</td>
           <td>{row.description}</td>
           <td>{row.author}</td>
           <td>{row.create_at}</td>
         </tr>
-      ));
-    }).catch(error => console.warn(error));
+      </tbody>
+    );
+  }
+
+  const [inputs, setInputs] = useState({});
+  const handleChange = (event) => { //all form changes will directly transferred to inputs variable
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}));
   }
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -51,7 +57,6 @@ export default function Book(){
             <th>Create</th>
           </tr>
         </tbody>
-        <tbody id="list_cont"></tbody>
         {GetList()}
       </table>
     </form>
