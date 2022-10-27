@@ -13,9 +13,9 @@ export default function Home() {
   //alert(SessionGet("test_session"));
   function user_profile(){
     if(SessionGet('session_name')){
-      return(<span>Hi, <b>{SessionGet('session_name')}</b> |&nbsp;</span>);
+      return(<span>Hi, <b>{SessionGet('session_name')}</b> |&nbsp;<a href="/logout">Logout</a></span>);
     }else{
-      return(<span></span>);
+      return(<a href="/login">Login</a>);
     }
   }
 
@@ -23,7 +23,7 @@ export default function Home() {
     <Router>
       <div class="Home-header">
         <div class="left"><p>HEADER SECTION</p></div>
-        <div class="right">{user_profile()}<a href="/logout">Logout</a></div>
+        <div class="right">{user_profile()}</div>
       </div>
       <div class="Home-body">
         <div class="Home-navigation">
