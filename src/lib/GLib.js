@@ -23,3 +23,6 @@ export function falert(msg,type){
     break;
   }
 }
+export function nl2br (str, is_xhtml) {   
+	return str.split('\n').map(chunk => <div>{chunk}</div>);
+}

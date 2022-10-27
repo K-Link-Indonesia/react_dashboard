@@ -57,8 +57,8 @@ export default function Login(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <center>
-        <input name="username" value={inputs["username"] || ""}  onChange={handleChange} placeholder="Username"/><br/>
-        <input name="password" value={inputs["password"] || ""}  onChange={handleChange} placeholder="Password"/><br/>
+        <input name="username" value={inputs["username"] || ""} placeholder="Username" onChange={handleChange}/><br/>
+        <input name="password" value={inputs["password"] || ""} placeholder="Password" onChange={handleChange}/><br/>
         <button type="submit">Submit</button>
         <button type="button" onClick={Register}>Register</button>
         <button type="button" onClick={Notify}>Notify</button>
