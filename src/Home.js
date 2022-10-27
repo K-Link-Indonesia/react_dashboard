@@ -6,6 +6,7 @@ import {CCC} from './lib/GLib';
 import Login, { Logout } from './Login';
 import {SessionGet, SessionSet} from './lib/Session';
 import { fontWeight } from '@mui/system';
+import Book from './Book';
 
 export default function Home() {
   //alert("before: "+SessionGet("test_session"));
@@ -29,11 +30,13 @@ export default function Home() {
         <div class="Home-navigation">
           <a href="/">Home</a><br/>
           <a href="/login">Login Form</a><br/>
+          <a href="/book">Books</a><br/>
         </div>
         <div class="Home-content">
           <Routes>
             <Route path='/login' element={<Login/>}/>
             <Route path='/logout' element={<Logout/>}/>
+            <Route path='/book' element={<Book/>}/>
           </Routes>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { NotificationContainer } from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { falert } from './lib/GLib';
 import { SessionDestroy, SessionSet } from './lib/Session';
 
-export default function Login(){
+export default function Book(){
   //falert('baru nih');
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => { //all form changes will directly transferred to inputs variable
@@ -13,23 +13,6 @@ export default function Login(){
   }
   const Notify = (event) => {
     falert('keren nih');
-  }
-  const Register = (event) => {
-    event.preventDefault();
-    var url="https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/register";
-    fetch(url,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        username:inputs['username'],
-        password:inputs['password'],
-        password_confirmation:inputs['password'],
-      })
-    }).then(
-      (response) => response.json()
-    ).then((result)=>{
-      alert(JSON.stringify(result));
-    }).catch(error => console.warn(error));
   }
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,18 +39,21 @@ export default function Login(){
   return (
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
-      <center>
-        <input name="username" value={inputs["username"] || ""}  onChange={handleChange} placeholder="Username"/><br/>
-        <input name="password" value={inputs["password"] || ""}  onChange={handleChange} placeholder="Password"/><br/>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={Register}>Register</button>
-        <button type="button" onClick={Notify}>Notify</button>
-      </center>
+      <h3>Books</h3>
+      <table width="100%" border="1">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Author</th>
+          <th>Create</th>
+        </tr>
+        <tr>
+          <td>Title</td>
+          <td>Description</td>
+          <td>Author</td>
+          <td>Create</td>
+        </tr>
+      </table>
     </form>
   );
-}
-export function Logout(){
-  SessionDestroy();
-  window.location="/home";
-  //return (<div>You have been logout successfully.</div>);
 }
