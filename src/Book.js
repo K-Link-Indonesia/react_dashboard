@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { falert } from './lib/GLib';
-import { SessionDestroy, SessionSet } from './lib/Session';
+import { SessionDestroy, SessionGet, SessionSet } from './lib/Session';
 
 export default function Book(){
   //falert('baru nih');
@@ -14,27 +14,24 @@ export default function Book(){
   const Notify = (event) => {
     falert('keren nih');
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //var url="http://localhost/test_react.php";
-    var url="https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/login";
-    fetch(url,{
+  const GetList = (event) => {
+    fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
       method:"POST",
-      //headers:{"Content-Type":"application/x-www-form-urlencoded"},
-      headers:{"Content-Type":"application/json"},
-      //body:new URLSearchParams(inputs).toString()
-      body:JSON.stringify(inputs)
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":SessionGet("session_token")
+      },
+      body:JSON.stringify({
+        query:"query{getAllBooks{id\nauthor}}",
+      })
     }).then(
       (response) => response.json()
     ).then((result)=>{
       alert(JSON.stringify(result));
-      if(result['status']==true){
-        SessionSet("session_id",result['result']['id']);
-        SessionSet("session_name",result['result']['username']);
-        SessionSet("session_token",result['result']['token']);
-        window.location='/';
-      }
     }).catch(error => console.warn(error));
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -53,6 +50,7 @@ export default function Book(){
           <td>Author</td>
           <td>Create</td>
         </tr>
+        {GetList()}
       </table>
     </form>
   );
