@@ -22,6 +22,4 @@ export function falert(msg,type){
       NotificationManager.info(msg);
     break;
   }
-  
-  return(<NotificationContainer/>);
 }
