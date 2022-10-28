@@ -32,7 +32,7 @@ export default function Book(){
           <td>{row.author}</td>
           <td>{row.create_at}</td>
           <td align="center">
-          <button type="button" onClick={()=>window.location='/book/edit/'+row.id}>Edit</button>
+          <button type="button" onClick={()=>window.location='/book/save/'+row.id}>Edit</button>
             <button type="button" onClick={()=>Delete(row)}>Delete</button>
           </td>
         </tr>
@@ -61,7 +61,7 @@ export default function Book(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <h3>Books</h3>
-      <button type="button" onClick={()=>window.location='/book/edit/-'}>Add New</button>
+      <button type="button" onClick={()=>window.location='/book/save/-'}>Add New</button>
       <table width="100%" border="1">
         <tbody>
           <tr>
@@ -78,7 +78,7 @@ export default function Book(){
   );
 }
 
-export function BookEdit(){
+export function BookSave(){
   var p=useParams();
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -95,6 +95,11 @@ export function BookEdit(){
       }).then(
         (response) => response.json()
       ).then((result)=>{
+        if(!result.data.getOneBook){
+          alert('Data tidak ditemukan');
+          window.location='/book';
+          return;
+        }
         setData(result.data.getOneBook);
         //alert(JSON.stringify(result.data.getOneBook));
       }).catch(error => console.warn(error));
@@ -109,7 +114,12 @@ export function BookEdit(){
   const handleSubmit = (event) => {
     event.preventDefault();
     var errmsg="";
-
+    if(!data.title){
+      errmsg+="Title is required\n";
+    }
+    if(!data.author){
+      errmsg+="Author is required\n";
+    }
     if(errmsg==""){
       if(p.id=="-"){
         var ql_query="mutation{createBook(author:"+JSON.stringify(data.author)+",title:"+JSON.stringify(data.title)+",description:"+JSON.stringify(data.description)+"){id}}";
@@ -136,16 +146,22 @@ export function BookEdit(){
           alert(errmsg);
           //alert(JSON.stringify(result));
         }else{
-          alert('Data berhasil diupdate');
+          if(p.id=="-"){
+            alert('Data berhasil ditambahkan');
+          }else{
+            alert('Data berhasil diupdate');
+          }
           window.location='/book';
         }
       }).catch(error => console.warn(error));
+    }else{
+      alert(errmsg);
     }
   }
   return (
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
-      <h3>Book Edit</h3>
+      <h3>{(p.id=="-")?"Add":"Edit"} Book</h3>
       Author:<br/>
       <input name="author" placeholder='Author' value={data.author} onChange={handleChange}/><br/>
       Title:<br/>

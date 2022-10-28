@@ -6,7 +6,7 @@ import {CCC} from './lib/GLib';
 import Login, { Logout } from './Login';
 import {SessionGet, SessionSet} from './lib/Session';
 import { fontWeight } from '@mui/system';
-import Book,{BookEdit} from './Book';
+import Book,{BookSave} from './Book';
 
 export default function Home() {
   //alert("before: "+SessionGet("test_session"));
@@ -37,7 +37,7 @@ export default function Home() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/logout' element={<Logout/>}/>
             <Route path='/book' element={<Book/>}/>
-            <Route path='/book/edit/:id' element={<BookEdit/>}/>
+            <Route path='/book/save/:id' element={<BookSave/>}/>
           </Routes>
         </div>
       </div>
