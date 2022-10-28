@@ -61,6 +61,7 @@ export default function Book(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <h3>Books</h3>
+      <button type="button" onClick={()=>window.location='/book/edit/-'}>Add New</button>
       <table width="100%" border="1">
         <tbody>
           <tr>
@@ -81,21 +82,23 @@ export function BookEdit(){
   var p=useParams();
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":SessionGet("session_token")
-      },
-      body:JSON.stringify({
-        query:"query{getOneBook(bookId:"+p.id+"){id\nauthor\ntitle\ndescription\ncreate_at}}",
-      })
-    }).then(
-      (response) => response.json()
-    ).then((result)=>{
-      setData(result.data.getOneBook);
-      //alert(JSON.stringify(result.data.getOneBook));
-    }).catch(error => console.warn(error));
+    if(p.id!="-"){
+      fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":SessionGet("session_token")
+        },
+        body:JSON.stringify({
+          query:"query{getOneBook(bookId:"+p.id+"){id\nauthor\ntitle\ndescription\ncreate_at}}",
+        })
+      }).then(
+        (response) => response.json()
+      ).then((result)=>{
+        setData(result.data.getOneBook);
+        //alert(JSON.stringify(result.data.getOneBook));
+      }).catch(error => console.warn(error));
+    }
   }, []);
 
   const handleChange = (event) => { //all form changes will directly transferred to inputs variable
@@ -105,30 +108,39 @@ export function BookEdit(){
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":SessionGet("session_token")
-      },
-      body:JSON.stringify({
-        query:"mutation{updateBook(idBook:"+p.id+",author:"+JSON.stringify(data.author)+",title:"+JSON.stringify(data.title)+",description:"+JSON.stringify(data.description)+"){id\nauthor\ntitle\ndescription}}",
-      })
-    }).then(
-      (response) => response.json()
-    ).then((result)=>{
-      if(result["errors"]){
-        var errmsg="";
-        for(var i in result["errors"]){
-          errmsg+=result["errors"][i]['message']+"\n";
-        }
-        alert(errmsg);
-        //alert(JSON.stringify(result));
+    var errmsg="";
+
+    if(errmsg==""){
+      if(p.id=="-"){
+        var ql_query="mutation{createBook(author:"+JSON.stringify(data.author)+",title:"+JSON.stringify(data.title)+",description:"+JSON.stringify(data.description)+"){id}}";
       }else{
-        alert('Data berhasil diupdate');
-        window.location='/book';
+        var ql_query="mutation{updateBook(idBook:"+p.id+",author:"+JSON.stringify(data.author)+",title:"+JSON.stringify(data.title)+",description:"+JSON.stringify(data.description)+"){id}}";
       }
-    }).catch(error => console.warn(error));
+      fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":SessionGet("session_token")
+        },
+        body:JSON.stringify({
+          query:ql_query,
+        })
+      }).then(
+        (response) => response.json()
+      ).then((result)=>{
+        if(result["errors"]){
+          var errmsg="";
+          for(var i in result["errors"]){
+            errmsg+=result["errors"][i]['message']+"\n";
+          }
+          alert(errmsg);
+          //alert(JSON.stringify(result));
+        }else{
+          alert('Data berhasil diupdate');
+          window.location='/book';
+        }
+      }).catch(error => console.warn(error));
+    }
   }
   return (
     <form onSubmit={handleSubmit}>
