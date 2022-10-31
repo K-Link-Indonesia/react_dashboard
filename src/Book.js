@@ -52,7 +52,30 @@ export default function Book(){
   const Delete = (data) => {
     var q=window.confirm("Are you sure to delete this data?");
     if(q==true){
-      alert(JSON.stringify(data));
+      fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":SessionGet("session_token")
+        },
+        body:JSON.stringify({
+          query:"query{deleteBook(bookId:"+JSON.stringify(data.id)+"){message}}",
+        })
+      }).then(
+        (response) => response.json()
+      ).then((result)=>{
+        if(result['errors']){
+          var errmsg="";
+          for(var i in result['errors']){
+            errmsg+=result['errors'][i]["message"];
+          }
+          alert(errmsg);
+        }else{
+          alert("Data berhasil dihapus");
+        }
+        window.location="/book";
+      }).catch(error => console.warn(error));
+      
     }else{
 
     }
