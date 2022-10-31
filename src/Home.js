@@ -22,17 +22,17 @@ export default function Home() {
 
   return (
     <Router>
-      <div class="Home-header">
-        <div class="left"><p>HEADER SECTION</p></div>
-        <div class="right">{user_profile()}</div>
+      <div className="Home-header">
+        <div className="left"><p>HEADER SECTION</p></div>
+        <div className="right">{user_profile()}</div>
       </div>
-      <div class="Home-body">
-        <div class="Home-navigation">
+      <div className="Home-body">
+        <div className="Home-navigation">
           <a href="/">Home</a><br/>
           <a href="/login">Login Form</a><br/>
           <a href="/book">Books</a><br/>
         </div>
-        <div class="Home-content">
+        <div className="Home-content">
           <Routes>
             <Route path='/login' element={<Login/>}/>
             <Route path='/logout' element={<Logout/>}/>
