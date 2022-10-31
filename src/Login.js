@@ -1,3 +1,4 @@
+import './css/login.css';
 import { useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import { falert } from './lib/GLib';
@@ -10,9 +11,6 @@ export default function Login(){
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}));
-  }
-  const Notify = (event) => {
-    falert('keren nih');
   }
   const Register = (event) => {
     event.preventDefault();
@@ -57,11 +55,17 @@ export default function Login(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <center>
-        <input name="username" value={inputs["username"] || ""} placeholder="Username" onChange={handleChange}/><br/>
-        <input name="password" value={inputs["password"] || ""} placeholder="Password" onChange={handleChange}/><br/>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={Register}>Register</button>
-        <button type="button" onClick={Notify}>Notify</button>
+        <div className='login_box'>
+          <div className='login_header'>Sign In</div>
+          <div className='login_input_box'>
+            <input name="username" value={inputs["username"] || ""} placeholder="Username" onChange={handleChange} className='login_input'/><br/>
+            <input name="password" value={inputs["password"] || ""} placeholder="Password" onChange={handleChange} className='login_input'/><br/>
+          </div>
+          <div className='login_button_box'>
+            <button type="submit" className='login_button'>Submit</button>
+            <button type="button" onClick={Register} className='login_button'>Register</button>
+          </div>
+        </div>
       </center>
     </form>
   );
