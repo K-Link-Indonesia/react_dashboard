@@ -31,8 +31,8 @@ export default function Book(){
           <td>{nl2br(row.description)}</td>
           <td>{row.author}</td>
           <td>{row.create_at}</td>
-          <td align="center">
-          <button type="button" onClick={()=>window.location='/book/save/'+row.id}>Edit</button>
+          <td align="center" nowrap="1">
+            <button type="button" onClick={()=>window.location='/book/save/'+row.id}>Edit</button>
             <button type="button" onClick={()=>Delete(row)}>Delete</button>
           </td>
         </tr>
@@ -85,7 +85,7 @@ export default function Book(){
       <NotificationContainer/>
       <h3>Books</h3>
       <button type="button" onClick={()=>window.location='/book/save/-'}>Add New</button>
-      <table width="100%" border="1">
+      <table width="100%" border="1" className='gridtable'>
         <tbody>
           <tr>
             <th>Title</th>

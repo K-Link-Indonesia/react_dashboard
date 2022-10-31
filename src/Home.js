@@ -1,5 +1,6 @@
-import './index.css';
-import './App.css';
+import './css/index.css';
+import './css/App.css';
+import './css/global.css';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import * as GLib from './lib/GLib';
 import {CCC} from './lib/GLib';
