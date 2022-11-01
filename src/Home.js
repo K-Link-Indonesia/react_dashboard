@@ -28,7 +28,7 @@ export default function Home() {
         <div className="right">{user_profile()}</div>
       </div>
       <div className="Home-body">
-        <div className="Home-navigation noprint">
+        <div id='mainmenu' className="Home-navigation noprint">
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/login">Login Form</a></li>
