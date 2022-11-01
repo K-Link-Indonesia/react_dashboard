@@ -185,14 +185,27 @@ export function BookSave(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <h3>{(p.id=="-")?"Add":"Edit"} Book</h3>
-      Author:<br/>
-      <input name="author" placeholder='Author' value={data.author} onChange={handleChange}/><br/>
-      Title:<br/>
-      <input name="title" placeholder='Title' value={data.title} onChange={handleChange}/><br/>
-      Description:<br/>
-      <textarea name="description" placeholder='Description' value={data.description} onChange={handleChange}/><br/>
-      <button type="submit">Submit</button>
-      <button type="button" onClick={()=>window.location='/book'}>Cancel</button>
+      <table className='inputtable'>
+        <tr>
+          <td>Author:</td>
+          <td><input name="author" placeholder='Author' value={data.author} onChange={handleChange}/></td>
+        </tr>
+        <tr>
+          <td>Title:</td>
+          <td><input name="title" placeholder='Title' value={data.title} onChange={handleChange}/></td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td><textarea name="description" placeholder='Description' value={data.description} onChange={handleChange}/></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <button type="submit">Submit</button>
+            <button type="button" onClick={()=>window.location='/book'}>Cancel</button>
+          </td>
+        </tr>
+      </table>
     </form>
   );
 }
