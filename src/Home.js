@@ -1,6 +1,6 @@
-import './css/index.css';
-import './css/App.css';
 import './css/global.css';
+import './css/local.css';
+import './css/App.css';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import * as GLib from './lib/GLib';
 import {CCC} from './lib/GLib';
@@ -24,14 +24,16 @@ export default function Home() {
   return (
     <Router>
       <div className="Home-header">
-        <div className="left"><p>HEADER SECTION</p></div>
+        <div className="left"><p className='font1'>HEADER SECTION</p></div>
         <div className="right">{user_profile()}</div>
       </div>
       <div className="Home-body">
-        <div className="Home-navigation">
-          <a href="/">Home</a><br/>
-          <a href="/login">Login Form</a><br/>
-          <a href="/book">Books</a><br/>
+        <div className="Home-navigation noprint">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login Form</a></li>
+            <li><a href="/book">Books</a></li>
+          </ul>
         </div>
         <div className="Home-content">
           <Routes>

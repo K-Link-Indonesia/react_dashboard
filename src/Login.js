@@ -1,4 +1,3 @@
-import './css/login.css';
 import { useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import { falert } from './lib/GLib';
