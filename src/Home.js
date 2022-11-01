@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <Router>
       <div className="Home-header">
-        <div className="left"><p className='font1'>HEADER SECTION</p></div>
+        <div className="left" style={{"line-height":"50px"}}><img src={require('./images/logo.png')} onClick={()=>{window.location='/'}} height="38" align="absmiddle"/><span className='font1' style={{"margin-left":"10px"}}>Dashboard Management System</span></div>
         <div className="right">{user_profile()}</div>
       </div>
       <div className="Home-body">

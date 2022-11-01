@@ -54,6 +54,7 @@ export default function Login(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <center>
+        <img src={require('./images/logo.png')} height="100" style={{"margin-top":"20px"}}/>
         <div className='login_box'>
           <div className='login_header'>Sign In</div>
           <div className='login_input_box'>

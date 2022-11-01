@@ -16,15 +16,17 @@ body {
 #root{
   height:100%;
 }
-
+div{
+  box-sizing: border-box;
+}
+img{
+  cursor:pointer;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-div{
-  box-sizing: border-box;
-}
 .Home-header{
   position:fixed;
   width:100%;
@@ -104,7 +106,7 @@ div{
   min-width:280px;
   max-width:350px;
   border-radius:5px 5px 0px 0px;
-  margin-top:100px;
+  margin-top:10px;
   border:1px solid #ccc;
 }
 .login_header{
