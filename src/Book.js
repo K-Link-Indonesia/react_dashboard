@@ -4,11 +4,14 @@ import { falert, nl2br } from './lib/GLib';
 import { SessionDestroy, SessionGet, SessionSet } from './lib/Session';
 import ReactDOM from 'react-dom/client';
 import { useParams } from 'react-router-dom';
+import { AuthCheck } from './lib/Auth';
+import GEnv from './lib/GEnv';
 
 export default function Book(){
+  AuthCheck();
   const [tableList, setTableList] = useState([]);
   useEffect(() => {
-    fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+    fetch(GEnv('graphql_url'),{
       method:"POST",
       headers:{
         "Content-Type":"application/json",
@@ -52,7 +55,7 @@ export default function Book(){
   const Delete = (data) => {
     var q=window.confirm("Are you sure to delete this data?");
     if(q==true){
-      fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+      fetch(GEnv('graphql_url'),{
         method:"POST",
         headers:{
           "Content-Type":"application/json",
@@ -106,7 +109,7 @@ export function BookSave(){
   const [data, setData] = useState([]);
   useEffect(() => {
     if(p.id!="-"){
-      fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+      fetch(GEnv('graphql_url'),{
         method:"POST",
         headers:{
           "Content-Type":"application/json",
@@ -149,7 +152,7 @@ export function BookSave(){
       }else{
         var ql_query="mutation{updateBook(idBook:"+p.id+",author:"+JSON.stringify(data.author)+",title:"+JSON.stringify(data.title)+",description:"+JSON.stringify(data.description)+"){id}}";
       }
-      fetch("https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/graphql",{
+      fetch(GEnv('graphql_url'),{
         method:"POST",
         headers:{
           "Content-Type":"application/json",

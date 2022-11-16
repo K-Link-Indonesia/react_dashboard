@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
+import GEnv from './lib/GEnv';
 import { falert } from './lib/GLib';
 import { SessionDestroy, SessionSet } from './lib/Session';
 
@@ -13,7 +14,7 @@ export default function Login(){
   }
   const Register = (event) => {
     event.preventDefault();
-    var url="https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/register";
+    var url=GEnv('api_register');
     fetch(url,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -31,7 +32,7 @@ export default function Login(){
   const handleSubmit = (event) => {
     event.preventDefault();
     //var url="http://localhost/test_react.php";
-    var url="https://dy71wcl0rh.execute-api.ap-southeast-1.amazonaws.com/staging/login";
+    var url=GEnv('api_login');
     fetch(url,{
       method:"POST",
       //headers:{"Content-Type":"application/x-www-form-urlencoded"},
@@ -54,7 +55,7 @@ export default function Login(){
     <form onSubmit={handleSubmit}>
       <NotificationContainer/>
       <center>
-        <img src={require('./images/logo.png')} height="100" style={{"margin-top":"20px"}}/>
+        <img src={require('./images/logo.png')} height="100" style={{"marginTop":"20px"}}/>
         <div className='login_box'>
           <div className='login_header'>Sign In</div>
           <div className='login_input_box'>
